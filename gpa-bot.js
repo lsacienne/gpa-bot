@@ -18,7 +18,7 @@ client.once('ready', () => {
    console.log('Félicitations, votre bot Discord a été correctement initialisé !');
 });
 
-// Event listener when for the commands entered by an user.
+// Event listener for the commands entered by an user.
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 

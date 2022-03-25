@@ -60,64 +60,15 @@ module.exports = {
                     .setURL('https://discord.js.org')
                     .setDescription(`Cette application permet de calculer votre GPA. Suivez les instructions ci-dessous :\n- Indiquez votre nombre d'UV\nNombre d'UV : **${nombre_uv}**`);
                 await i.update({embeds: [embed], components: []});
-                
-                for(let j = 0; j<nombre_uv;j++) {
-                    let note = '';
-                    let credits = 0;
-                    const row = new MessageActionRow()
-                        .addComponents(
-                            new MessageButton()
-                                .setCustomId('confirm')
-                                .setLabel("Valider")
-                                .setStyle('PRIMARY')
-                        );
 
-                    const uv_message = new MessageEmbed()
-                        .setColor('#0099ff')
-                        .setTitle('GPA')
-                        .setURL('https://discord.js.org')
-                        .setDescription(`Cette application permet de calculer votre GPA. Suivez les instructions ci-dessous :\n
-                        - Indiquez le nombre de crédits de l'UV\n
-                        - Indiquez la note que vous avez obtenu :\n
-                        Nombre de crédits de l'UV : **${credits}**\n
-                        Note obtenue à l'UV : ${note}`);
-
-                    const message = await interaction.client.channels.cache.get(interaction.channelId).send({content: `UV ${j+1} :`, embeds: [uv_message], components: [row], ephemeral: true })
-                    
-                    try {
-                        await message.react('1️⃣');
-                        await message.react('2️⃣');
-                        await message.react('3️⃣');
-                        await message.react('4️⃣');
-                        await message.react('5️⃣');
-                        await message.react('6️⃣');
-                        await message.react('🔸');
-                        await message.react('🇦');
-                        await message.react('🇧');
-                        await message.react('🇨');
-                        await message.react('🇩');
-                        await message.react('🇪');
-                        await message.react('🇫');
-                    } catch (error) {
-                        console.error('One of the emojis failed to react:', error);
-                    }
+                let list_results = [];
+                let list_widgets = [];
+                let list_uv_messages = [];
+                for(let j = 0; j<nombre_uv;++j) {
+                    list_results.push([0,' ']);
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                require("../compute-gpa-functions/uv_collector").generateUvCollector(interaction,nombre_uv,0,list_results, list_widgets, list_uv_messages);
 
             } else if (i.customId === 'plus'){
                 nombre_uv++;
