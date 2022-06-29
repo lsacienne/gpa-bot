@@ -68,7 +68,14 @@ module.exports = {
                     list_results.push([0,' ']);
                 }
 
-                require("../compute-gpa-functions/uv_collector").generateUvCollector(interaction,nombre_uv,0,list_results, list_widgets, list_uv_messages);
+                require("../compute-gpa-functions/uv_collector").generateUvCollector(
+                    interaction,
+                    nombre_uv,
+                    0,
+                    list_results,
+                    list_widgets,
+                    list_uv_messages
+                );
 
             } else if (i.customId === 'plus'){
                 nombre_uv++;
